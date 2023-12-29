@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "table_pot_player_transactions",
+  "info": {
+    "singularName": "table-pot-player-transaction",
+    "pluralName": "table-pot-player-transactions",
+    "displayName": "Table_pot_player_transactions"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "table_id": {
+      "type": "biginteger"
+    },
+    "wallet_transaction_id": {
+      "type": "biginteger"
+    },
+    "pot_before": {
+      "type": "biginteger"
+    },
+    "pot_final": {
+      "type": "biginteger"
+    }
+  }
+}

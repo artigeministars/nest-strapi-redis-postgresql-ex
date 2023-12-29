@@ -1,0 +1,10 @@
+.tmp/
+.cache/
+.git/
+build
+node_modules/
+data/
+npm-debug.log
+docker-compose-dev.yml
+docker-compose-prod.yml
+

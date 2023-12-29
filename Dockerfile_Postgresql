@@ -1,0 +1,5 @@
+FROM postgres:latest
+ENV POSTGRES_DB pokeroyun
+ENV POSTGRES_USER turkpokeradmin
+ENV POSTGRES_PASSWORD turkpokeradmin
+COPY ./init/init.sql /docker-entrypoint-initdb.d/init.sql

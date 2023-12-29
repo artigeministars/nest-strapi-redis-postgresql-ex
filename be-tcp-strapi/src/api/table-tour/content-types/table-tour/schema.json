@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "table_tours",
+  "info": {
+    "singularName": "table-tour",
+    "pluralName": "table-tours",
+    "displayName": "table_tour",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "table_id": {
+      "type": "biginteger"
+    },
+    "player_id": {
+      "type": "biginteger"
+    },
+    "move_type": {
+      "type": "enumeration",
+      "enum": [
+        "fold",
+        "call",
+        "raise"
+      ]
+    },
+    "move_amount": {
+      "type": "biginteger"
+    },
+    "transaction_wallet_id": {
+      "type": "biginteger"
+    },
+    "tour_step_id": {
+      "type": "biginteger"
+    }
+  }
+}

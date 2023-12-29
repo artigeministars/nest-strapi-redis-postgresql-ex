@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "table_players",
+  "info": {
+    "singularName": "table-player",
+    "pluralName": "table-players",
+    "displayName": "table_players",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "table_id": {
+      "type": "biginteger"
+    },
+    "player_id": {
+      "type": "biginteger"
+    },
+    "player_status": {
+      "type": "enumeration",
+      "enum": [
+        "active",
+        "passive",
+        "wait"
+      ]
+    },
+    "player_order": {
+      "type": "enumeration",
+      "enum": [
+        "First",
+        "Second",
+        "Third",
+        "Fourth",
+        "Fifth"
+      ]
+    }
+  }
+}

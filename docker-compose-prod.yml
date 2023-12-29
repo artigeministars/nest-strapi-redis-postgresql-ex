@@ -1,0 +1,95 @@
+version: '3.9'
+
+services:
+  be_tcp_strapi_prod:
+    container_name: be_tcp_strapi_prod
+    image: naskio/strapi
+    restart: unless-stopped
+    env_file: ./be-tcp-strapi/.env.prod
+    environment:
+      NODE_ENV: production
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: db_prod
+      DATABASE_PORT: 5432
+      DATABASE_NAME: ${DATABASE_NAME:-pokeroyun}
+      DATABASE_USERNAME: ${DATABASE_USERNAME:-turkpokeradmin}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:-turkpokeradmin}
+      JWT_SECRET: ${JWT_SECRET}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      APP_KEYS: ${APP_KEYS}
+    ports:
+      - '1341:1337'
+    volumes:
+      - ./be-tcp-strapi:/srv/app
+    depends_on:
+      - db_prod
+    networks:
+      - poker-game-prod-network
+    links:
+      - db_prod
+    command: 'npm run start'
+
+  be_tcp_app_prod:
+    container_name: be_tcp_app_prod
+    image: be_tcp_app_prod_image
+    build:
+      context: .
+      dockerfile: ./be-tcp-app/Dockerfile_Nest_Prod
+    restart: unless-stopped
+    env_file:
+      - ./be-tcp-app/.env.prod
+    ports:
+      - "3006:3000"
+    depends_on:
+      - db_prod
+      - redis_prod
+    networks:
+      - poker-game-prod-network
+    volumes:
+      - ./be-tcp-app:/app
+    command: "node dist/main.js"
+
+  db_prod:
+    container_name: poker_postgres_prod
+    platform: linux/amd64 #for platform error on Apple M1 chips
+    image: poker_postgres_dev
+    build:
+      context: .
+      dockerfile: Dockerfile_Postgresql
+    restart: always
+    env_file: .env.prod
+    ports:
+      - "5448:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data # if you want to use a bind folder
+      # - strapi-data:/var/lib/postgresql/data/ #using a volume
+      - ./init/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    networks:
+      - poker-game-prod-network
+
+  redis_prod:
+    container_name: redis_prod_db
+    image: redis_prod_db_image
+    build: ./redis
+    volumes:
+      - redis-data:/data
+    environment:
+      - REDIS_PORT=6379
+    ports:
+      - "6379:6379"
+    networks:
+      - poker-game-prod-network
+    restart: unless-stopped
+
+networks:
+  poker-game-prod-network:
+    name: poker-game-prod-network
+    driver: bridge
+
+volumes:
+  pgdata:
+  redis-data:

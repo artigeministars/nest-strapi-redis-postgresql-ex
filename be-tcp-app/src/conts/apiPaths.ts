@@ -1,0 +1,1 @@
+export const getTableUrl = "http://167.86.82.91:3300/tables/getTable/";

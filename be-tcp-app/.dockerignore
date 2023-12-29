@@ -1,0 +1,9 @@
+.tmp/
+.cache/
+.git/
+node_modules/
+data/
+npm-debug.log
+README.md
+
+

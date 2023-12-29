@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "table_player_wallet_transactions",
+  "info": {
+    "singularName": "table-player-wallet-transaction",
+    "pluralName": "table-player-wallet-transactions",
+    "displayName": "Table_player_wallet_transactions"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "table_id": {
+      "type": "biginteger"
+    },
+    "player_id": {
+      "type": "biginteger"
+    },
+    "amount": {
+      "type": "biginteger"
+    },
+    "table_tour_id": {
+      "type": "biginteger"
+    },
+    "transaction_id": {
+      "type": "biginteger"
+    }
+  }
+}
